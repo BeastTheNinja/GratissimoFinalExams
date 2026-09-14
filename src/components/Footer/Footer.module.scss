@@ -1,0 +1,84 @@
+@use "../../utils/colors.scss" as colors;
+@use "../../utils/font.scss" as fonts;
+
+// > krokodille næbbet siger bare dette her skal være direkte child af forrige fx .footerContainer er parent til div men jeg siger specifik at denne div skal være child af footerContainer
+
+.footerContainer {
+  background-color: colors.$main;
+  color: colors.$white;
+  > div {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    margin: 1rem;
+    gap: 5rem;
+
+    ul{
+      h6{
+        display: block;
+        margin-bottom: 1rem;
+      }
+    }
+
+    ul:nth-child(4) {
+      form {
+        position: relative;
+        width: 100%;
+        max-width: 360px;
+        height: 42px;
+        overflow: hidden;
+        background-color: colors.$white;
+        border-radius: 6px;
+
+        > img {
+          position: absolute;
+          top: 50%;
+          left: 12px;
+          z-index: 1;
+          width: 18px;
+          height: 18px;
+          transform: translateY(-50%);
+          pointer-events: none;
+        }
+
+        > div {
+          width: 100%;
+          height: 100%;
+          margin: 0;
+          padding: 0;
+        }
+
+        input {
+          width: 100%;
+          height: 100%;
+          box-sizing: border-box;
+          padding: 10px 92px 10px 38px;
+          border: none;
+        }
+
+        > button {
+          position: absolute;
+          top: 0;
+          right: 0;
+          height: 100%;
+          padding: 0 14px;
+          background-color: colors.$accent;
+          border: none;
+          border-radius: 0 6px 6px 0;
+          color: colors.$white;
+          cursor: pointer;
+        }
+      }
+    }
+
+    > ul:last-child {
+      padding: 15px;
+
+      img {
+        display: inline-block;
+        width: 28px;
+        height: 28px;
+        margin-right: 10px;
+      }
+    }
+  }
+}
