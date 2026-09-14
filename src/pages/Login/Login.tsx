@@ -1,11 +1,11 @@
 import {
-  FormEvent,
   useState,
 } from "react";
+import type { FormEvent } from "react";
 
 import { useNavigate } from "react-router";
 
-import Button from "../../components/Button/Button";
+
 import Input from "../../components/Input/Input";
 import Loading from "../../components/Loading/Loading";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
@@ -15,7 +15,7 @@ import { login } from "../../services/auth.service";
 function Login() {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
   const [loading, setLoading] = useState(false);
@@ -31,13 +31,20 @@ function Login() {
 
     try {
       await login({
-        email,
+        username: userName,
         password,
       });
 
-      navigate("/dashboard");
+      window.dispatchEvent(
+        new CustomEvent("auth-change", {
+          detail: true,
+        })
+      );
+
+      navigate("/profil");
+
     } catch {
-      setError("Invalid email or password.");
+      setError("Invalid username or password.");
     } finally {
       setLoading(false);
     }
@@ -59,13 +66,13 @@ function Login() {
 
       <form onSubmit={handleSubmit}>
         <Input
-          id="email"
-          name="email"
-          label="Email"
-          type="email"
-          value={email}
+          id="username"
+          name="username"
+          label="Username"
+          type="text"
+          value={userName}
           onChange={(event) =>
-            setEmail(event.target.value)
+            setUserName(event.target.value)
           }
           required
         />
@@ -82,9 +89,8 @@ function Login() {
           required
         />
 
-        <Button type="submit">
-          Login
-        </Button>
+        <input type="submit" value="login" />
+
       </form>
     </section>
   );

@@ -11,7 +11,6 @@ function ProtectedRoute() {
   useEffect(() => {
     async function checkAuthentication() {
       const loggedIn = await isLoggedIn();
-
       setAuthenticated(loggedIn);
     }
 
@@ -19,9 +18,7 @@ function ProtectedRoute() {
   }, []);
 
   if (authenticated === null) {
-    return (
-      <Loading message="Checking authentication..." />
-    );
+    return <Loading message="Checking authentication..." />;
   }
 
   if (!authenticated) {
