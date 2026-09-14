@@ -41,7 +41,7 @@ function Login() {
         })
       );
 
-      navigate("/profil");
+      navigate("/mypage");
 
     } catch {
       setError("Invalid username or password.");

@@ -1,15 +1,12 @@
-import { useNavigate } from "react-router";
-
-import Button from "../Button/Button";
-
 import { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router";
 
+import logo from "../../assets/logo/GratissimoLogo.svg";
 import { isLoggedIn, logout } from "../../services/auth.service";
 
 function Navbar() {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
-
 
   useEffect(() => {
     async function checkLogin() {
@@ -23,7 +20,6 @@ function Navbar() {
     }
 
     checkLogin();
-
     window.addEventListener("auth-change", handleAuthChange);
 
     return () => {
@@ -32,50 +28,99 @@ function Navbar() {
   }, []);
 
   async function handleLogout() {
-    logout();
+    try {
+      await logout();
+    } finally {
+      window.dispatchEvent(
+        new CustomEvent("auth-change", {
+          detail: false,
+        })
+      );
 
-    window.dispatchEvent(
-      new CustomEvent("auth-change", {
-        detail: false,
-      })
-    );
-
-    setLoggedIn(false);
-    navigate("/");
+      setLoggedIn(false);
+      navigate("/");
+    }
   }
 
+  const linkClassName = ({ isActive }: { isActive: boolean }) =>
+    `text-base text-[#F9F9F9] ${isActive ? "underline" : ""
+    }`;
+
   return (
-    <nav>
-      <div>
-        
-      </div>
+    <>
+      <header className="bg-[#AB0E0E]">
+        <img
+          className="h-20 cursor-pointer ml-10"
+          src={logo}
+          alt="GratissimoLogo"
+          onClick={() => navigate("/")}
+        />
+      </header>
 
+      <nav className="bg-[#8B0808]">
+        <div className="flex flex-wrap items-center justify-between gap-5 ml-15">
+          <div className="flex flex-wrap items-center gap-5">
+            <NavLink
+              to="/SearchResult"
+              className={linkClassName}
+            >
+              Alle jobs
+            </NavLink>
 
-      <div>
+            <NavLink
+              to="/advertise"
+              className={linkClassName}
+            >
+              Opret annonce
+            </NavLink>
 
-        {!loggedIn ? (
-          <>
-            <Button onClick={() => navigate("/login")}>
-              Log ind
-            </Button>
+            <NavLink
+              to="/news"
+              className={linkClassName}
+            >
+              Nyheder
+            </NavLink>
+          </div>
 
-            <Button onClick={() => navigate("/register")}>
-              Opret bruger
-            </Button>
-          </>
-        ) : (
-          <>
-            <Button onClick={() => navigate("/profil")}>
-              Profil
-            </Button>
+          <div className="flex flex-wrap items-center gap-5 mr-15">
+            {!loggedIn ? (
+              <>
+                <NavLink
+                  to="/login"
+                  className={linkClassName}
+                >
+                  Log ind
+                </NavLink>
 
-            <Button onClick={handleLogout}>
-              Log ud
-            </Button>
-          </>
-        )}
-      </div>
-    </nav>
+                <NavLink
+                  to="/register"
+                  className={linkClassName}
+                >
+                  Opret bruger
+                </NavLink>
+              </>
+            ) : (
+              <>
+                <NavLink
+                  to="/mypage"
+                  className={linkClassName}
+                >
+                  Min side
+                </NavLink>
+
+                <button
+                  type="button"
+                  className="text-base text-[#F9F9F9]"
+                  onClick={handleLogout}
+                >
+                  Log ud
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      </nav>
+    </>
   );
 }
 

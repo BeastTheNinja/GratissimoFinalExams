@@ -13,9 +13,8 @@ export type RegisterCredentials = {
   city: string;
   email: string;
   password: string;
-  hasNewsletter: boolean;
-  hasNotification: boolean;
-  isActive: boolean;
+  phone: number;
+
 };
 
 export type AuthResponse = {
@@ -32,7 +31,6 @@ export type RegisterResponse = {
   zipcode: number;
   city: string;
   email: string;
-  hasNewsletter: boolean;
-  hasNotification: boolean;
+  phone: number;
 
 };

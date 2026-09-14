@@ -4,42 +4,72 @@ import type {
   AuthResponse,
   LoginCredentials,
   RegisterCredentials,
-  RegisterResponse
+  RegisterResponse,
 } from "../types/auth";
 
 const cookies = new Cookies();
 
 export async function login(credentials: LoginCredentials) {
-  const response = await api<AuthResponse>("/api/auth/login", {
+  const response = await api<AuthResponse>("/api/login", {
     method: "POST",
     body: JSON.stringify(credentials),
   });
 
   cookies.set("accessToken", response.accessToken);
   cookies.set("refreshToken", response.refreshToken);
-  cookies.set("user", response.user)
+  cookies.set("user", response.user);
 
   return response;
 }
-export async function register(
-  credentials: RegisterCredentials
-) {
+
+export async function refreshToken() {
+  const token = cookies.get<string>("refreshToken");
+
+  if (!token) {
+    throw new Error("No refresh token available");
+  }
+
+  const response = await api<AuthResponse>("/api/refresh", {
+    method: "POST",
+    body: JSON.stringify({
+      refreshToken: token,
+    }),
+  });
+
+  cookies.set("accessToken", response.accessToken);
+  cookies.set("refreshToken", response.refreshToken);
+
+  return response;
+}
+export async function register(credentials: RegisterCredentials) {
   return api<RegisterResponse>("/api/users", {
     method: "POST",
     body: JSON.stringify(credentials),
   });
 }
 
-export function logout() {
-  cookies.remove("accessToken");
-  cookies.remove("refreshToken");
-}
-
 export async function isLoggedIn() {
   try {
-    await api("/api/auth/verify");
+    await api("/api/verify");
     return true;
   } catch {
     return false;
+  }
+}
+
+export async function logout() {
+  const refreshTokenValue = cookies.get<string>("refreshToken");
+
+  try {
+    await api("/api/logout", {
+      method: "POST",
+      body: JSON.stringify({
+        refreshToken: refreshTokenValue,
+      }),
+    });
+  } finally {
+    cookies.remove("accessToken");
+    cookies.remove("refreshToken");
+    cookies.remove("user");
   }
 }

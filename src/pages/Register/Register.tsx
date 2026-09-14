@@ -22,6 +22,7 @@ function Register() {
   const [zipcode, setZipcode] = useState("");
   const [city, setCity] = useState("");
   const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("")
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -43,9 +44,7 @@ function Register() {
         city,
         email,
         password,
-        hasNewsletter: false,
-        hasNotification: false,
-        isActive: true,
+        phone: Number(phone),
       });
 
       navigate("/login");
@@ -142,6 +141,16 @@ function Register() {
             setCity(event.target.value)
           }
           required
+        />
+        <Input
+          id="phone"
+          name="phone"
+          label="Phone"
+          type="number"
+          value={phone}
+          onChange={(event) =>
+            setPhone(event.target.value)
+          }
         />
 
 
