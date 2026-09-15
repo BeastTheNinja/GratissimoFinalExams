@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router";
 import type { Job } from "../../types/Jobs";
+import styles from "./Category.module.scss";
 
 type CategoryProps = {
     jobs: Job[];
@@ -28,18 +29,24 @@ function Category({ jobs }: CategoryProps) {
     }
 
     return (
-        <section>
-            <h2>Kategorier</h2>
+        <section className={styles.categorySection}>
+            <h2>Find job ved kategori</h2>
 
-            {Object.entries(categoryCounts).map(([category, count]) => (
-                <button
-                    key={category}
-                    type="button"
-                    onClick={() => showCategory(category)}
-                >
-                    {category} ({count})
-                </button>
-            ))}
+            <div className={styles.categoryGrid}>
+                {Object.entries(categoryCounts).map(([category, count]) => (
+                    <button
+                        key={category}
+                        type="button"
+                        className={styles.categoryButton}
+                        onClick={() => showCategory(category)}
+                    >
+                        <span>{category}</span>
+                        <span className={styles.categoryCount}>
+                            {count}
+                        </span>
+                    </button>
+                ))}
+            </div>
         </section>
     );
 }

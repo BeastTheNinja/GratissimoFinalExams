@@ -1,4 +1,5 @@
 import { type FilterData } from "../../types/Filter";
+import styles from "./Filter.module.scss";
 
 type FilterProps = {
     values: FilterData;
@@ -27,7 +28,7 @@ function Filter({
     }
 
     return (
-        <div>
+        <div className={styles.filterContainer}>
             <select
                 value={values.region}
                 onChange={(event) =>

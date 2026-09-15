@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Testimony } from "../../types/Testimonies";
 import { GoDot, GoDotFill } from "react-icons/go";
+import styles from "./TestimoniesSlider.module.scss";
 
 type TestimoniesSliderProps = {
     testimonies: Testimony[];
@@ -39,14 +40,20 @@ function TestimoniesSlider({
     const currentTestimony = testimonies[currentIndex];
 
     return (
-        <section>
-            <article>
+        <section className={styles.slider}>
+            <article className={styles.testimony}>
                 <h2>{currentTestimony.title}</h2>
-                <p>{currentTestimony.content}</p>
-                <p>{currentTestimony.name}</p>
+
+                <p className={styles.content}>
+                    {currentTestimony.content}
+                </p>
+
+                <p className={styles.author}>
+                    {currentTestimony.name}
+                </p>
             </article>
 
-            <div>
+            <div className={styles.dots}>
                 {testimonies.map((testimony, index) => (
                     <button
                         key={testimony.id}
@@ -54,11 +61,10 @@ function TestimoniesSlider({
                         aria-label={`Vis testimony ${index + 1}`}
                         onClick={() => setCurrentIndex(index)}
                     >
-                        {/* Den aktive prik udfyldes, mens de andre forbliver tomme */}
                         {index === currentIndex ? (
-                            <GoDotFill size={12} color="#8B0808" />
+                            <GoDotFill />
                         ) : (
-                            <GoDot size={12} color="#777" />
+                            <GoDot />
                         )}
                     </button>
                 ))}

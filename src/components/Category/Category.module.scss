@@ -1,0 +1,45 @@
+@use "../../utils/colors.scss" as colors;
+
+.categorySection {
+  margin: 0 auto;
+  padding: 2rem 0;
+  background-color: colors.$white;
+
+  h2 {
+    margin-bottom: 2rem;
+  }
+
+  .categoryGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .categoryButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 48px;
+    overflow: hidden;
+    padding: 0 0 0 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: colors.$white;
+    text-align: left;
+    cursor: pointer;
+
+    &:hover {
+      background-color: colors.$white;
+    }
+
+    .categoryCount {
+      display: flex;
+      align-items: center;
+      align-self: stretch;
+      padding: 0 1rem;
+      background-color: #8b0808;
+      color: colors.$white;
+      font-weight: 700;
+    }
+  }
+}

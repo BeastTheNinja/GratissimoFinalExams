@@ -1,0 +1,62 @@
+@use "../../utils/colors.scss" as colors;
+
+.featuredSection {
+  width: min(100% - 2rem, 1200px);
+  margin: 0 auto;
+  padding: 2rem 0;
+
+  > h1 {
+    margin-bottom: 2rem;
+  }
+
+  .featuredGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+
+    > article {
+      overflow: hidden;
+      padding: 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #fff;
+      cursor: pointer;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 12px #00000026;
+      }
+
+      > h2 {
+        margin: 0;
+        padding: 1rem 1rem 0.75rem;
+        color: #8b0808;
+        font-size: 1.25rem;
+      }
+
+      > img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+      }
+
+      .cardContent {
+        padding: 0 1rem 1rem;
+
+        p {
+          margin: 0.75rem 0 0;
+          line-height: 1.5;
+
+          &:first-child {
+            color: #777;
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+  }
+}

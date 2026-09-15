@@ -1,0 +1,59 @@
+@use "../../utils/colors.scss" as colors;
+
+.slider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+  text-align: center;
+  background-color: colors.$white ;
+
+  .testimony {
+    width: 100%;
+
+    h2 {
+      margin-bottom: 1.5rem;
+      color: #8b0808;
+      font-size: 2rem;
+    }
+
+    .content {
+      margin: 0 auto;
+      color: #333;
+      line-height: 1.7;
+    }
+
+    .author {
+      margin-top: 1.5rem;
+      color: #777;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+  }
+
+  .dots {
+    display: flex;
+    gap: 0.25rem;
+    margin-top: 2rem;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.25rem;
+      border: none;
+      background: transparent;
+      color: #777;
+
+      &:hover {
+        color: #8b0808;
+      }
+
+      &:focus {
+        outline: 2px solid #8b0808;
+        outline-offset: 2px;
+      }
+    }
+  }
+}

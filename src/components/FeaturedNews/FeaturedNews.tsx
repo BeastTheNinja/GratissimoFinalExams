@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Card from "../Card/Card";
 import type { News } from "../../types/news";
 import { useNavigate } from "react-router";
+import styles from "./FeaturedNews.module.scss";
 
 type FeaturedNewsProps = {
     news: News[];
@@ -9,7 +10,7 @@ type FeaturedNewsProps = {
 
 function FeaturedNews({ news }: FeaturedNewsProps) {
     const navigate = useNavigate()
-    
+
     const [featuredNews, setFeaturedNews] = useState<News[]>([]);
 
     // Bland nyhederne tilfældigt og vis højst tre af dem som featured news
@@ -18,20 +19,45 @@ function FeaturedNews({ news }: FeaturedNewsProps) {
         setFeaturedNews(shuffledNews.slice(0, 3));
     }, [news]);
 
-    return (
-        <section>
-            {featuredNews.map((item) => {
+    function formatDate(date: string) {
+        const [, month, day] = date.split("T")[0].split("-");
 
-                return (
-                    <Card key={item.id} title={item.title} onClick={() => navigate("/news")} >
+        return `${day}/${month}`;
+    }
+
+    return (
+        <section className={styles.featuredSection}>
+            <h1>Udvalgte nyheder</h1>
+
+            <div className={styles.featuredGrid}>
+                {featuredNews.map((item) => (
+                    <Card
+                        key={item.id}
+                        onClick={() =>
+                            navigate("/news", {
+                                state: { selectedNews: item },
+                            })
+                        }
+                    >
                         <img
                             src={`${import.meta.env.VITE_API_URL}${item.imageUrl}`}
                             alt={item.title}
                         />
-                        <p>{item.content}</p>
+
+                        <div className={styles.cardContent}>
+                            <p>
+                                {formatDate(item.createdAt)} af {item.author}
+                            </p>
+
+                            <p>
+                                {item.content.length > 82
+                                    ? `${item.content.slice(0, 82)}...`
+                                    : item.content}
+                            </p>
+                        </div>
                     </Card>
-                );
-            })}
+                ))}
+            </div>
         </section>
     );
 }

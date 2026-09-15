@@ -1,0 +1,42 @@
+.filterContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  width: min(100% - 2rem, 900px);
+  margin: 0 auto 2rem;
+  padding: 0 0 1rem;
+
+  select {
+    width: 100%;
+    min-width: 0;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+
+    &:focus {
+      outline: 2px solid #8b0808;
+      outline-offset: 1px;
+    }
+  }
+
+  button {
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #8b0808;
+    color: #fff;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #6d0606;
+    }
+
+    &:focus {
+      outline: 2px solid #8b0808;
+      outline-offset: 2px;
+    }
+  }
+}

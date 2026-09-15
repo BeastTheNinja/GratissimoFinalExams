@@ -1,9 +1,7 @@
+import NewsArticle from "../../components/News/News"
+
 function News() {
 
-    return (
-        <>
-
-        </>
-    )
-} 
+    return <NewsArticle />
+}
 export default News

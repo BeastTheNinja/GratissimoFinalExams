@@ -1,14 +1,13 @@
 import { type FormEvent, useState } from "react";
 import Button from "../Button/Button";
 import SearchIcon from "../../assets/icons/icons8-search-50.svg"
+import styles from "./SearchBar.module.scss";
 
 type SearchBarProps = {
     onSearch: (query: string) => void;
 };
 
 function SearchBar({ onSearch }: SearchBarProps) {
-
-
 
     const [search, setSearch] = useState("");
 
@@ -18,22 +17,24 @@ function SearchBar({ onSearch }: SearchBarProps) {
     }
 
     return (
-        <>
-            <h1>Søg Frivilligt arbejde:</h1>
+        <section className={styles.searchSection}>
+            <h1>Søg frivilligt arbejde:</h1>
+
             <form onSubmit={handleSubmit}>
-                <img src={SearchIcon} alt="søge ikon" />
+                <img src={SearchIcon} alt="" />
+
                 <input
                     type="search"
                     value={search}
                     onChange={(event) => setSearch(event.target.value)}
                     placeholder="Hvad søger du efter?"
                 />
+
                 <Button type="submit">
                     Søg
                 </Button>
             </form>
-
-        </>
+        </section>
     );
 }
 
