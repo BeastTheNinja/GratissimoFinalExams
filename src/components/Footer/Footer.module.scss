@@ -1,7 +1,7 @@
 @use "../../utils/colors.scss" as colors;
 @use "../../utils/font.scss" as fonts;
 
-// > krokodille næbbet siger bare dette her skal være direkte child af forrige fx .footerContainer er parent til div men jeg siger specifik at denne div skal være child af footerContainer
+// Gælder kun for direkte children
 
 .footerContainer {
   background-color: colors.$main;
@@ -12,8 +12,8 @@
     margin: 1rem;
     gap: 5rem;
 
-    ul{
-      h6{
+    ul {
+      h6 {
         display: block;
         margin-bottom: 1rem;
       }
