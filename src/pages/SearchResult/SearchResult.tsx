@@ -5,6 +5,7 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import { useState } from "react";
 import type { FilterData } from "../../types/Filter";
 import Filter from "../../components/Filter/Filter";
+import JobList from "../../components/JobList/JobList";
 
 function SearchResult() {
 
@@ -93,20 +94,7 @@ function SearchResult() {
                 />
             </section>
 
-            {!jobs || jobs.length === 0 ? (
-                <p>Ingen resultater fundet.</p>
-            ) : (
-                jobs.map((job) => (
-                    <article key={job.id}>
-                        <h2>{job.title}</h2>
-                        <p>{job.description}</p>
-                        <p>{job.organization}</p>
-                        <p>
-                            {job.city} -  {job.jobCategory.name} - {job.workType.type}
-                        </p>
-                    </article>
-                ))
-            )}
+            <JobList jobs={jobs ?? []} />
         </>
     );
 }

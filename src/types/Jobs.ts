@@ -16,4 +16,5 @@ export type Job = {
     jobCategory: {
         name: string;
     };
+    createdAt: string;
 };

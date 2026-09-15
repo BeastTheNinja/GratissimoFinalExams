@@ -1,0 +1,119 @@
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: min(100% - 2rem, 900px);
+  margin: 0 auto;
+  padding: 2rem 0;
+
+  > p {
+    text-align: center;
+  }
+
+  > article {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px #00000012;
+
+    .cardHeader,
+    .cardInfo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .cardHeader {
+      margin-bottom: 0.75rem;
+
+      h2 {
+        margin: 0;
+        color: #8b0808;
+        font-size: 1.25rem;
+      }
+
+      p {
+        flex-shrink: 0;
+        color: #777;
+        font-size: 0.9rem;
+      }
+    }
+
+    .cardInfo {
+      margin-bottom: 1rem;
+      color: #555;
+      font-size: 0.95rem;
+      font-weight: 600;
+
+      p {
+        margin: 0;
+      }
+    }
+
+    > p {
+      margin: 0 0 1rem;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: auto;
+
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        min-height: 42px;
+        padding: 0.6rem 1rem;
+        border: none;
+        border-radius: 6px;
+        background-color: #8b0808;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+          background-color: #6d0606;
+        }
+
+        &:focus {
+          outline: 2px solid #8b0808;
+          outline-offset: 2px;
+        }
+
+        img {
+          width: 18px;
+          height: 18px;
+          object-fit: contain;
+        }
+      }
+    }
+
+    .details {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid #ddd;
+
+      p {
+        margin: 0.5rem 0;
+        color: #444;
+        line-height: 1.5;
+      }
+
+      h3 {
+        margin: 1.25rem 0 0.5rem;
+        color: #8b0808;
+        font-size: 1rem;
+      }
+    }
+  }
+}
