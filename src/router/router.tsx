@@ -23,10 +23,6 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/advertise",
-        element: <Advertise />,
-      },
-      {
         path: "/news",
         element: <News />,
       },
@@ -48,6 +44,10 @@ export const router = createBrowserRouter([
           {
             path: "/mypage",
             element: <MyPage />,
+          },
+          {
+            path: "/advertise",
+            element: <Advertise />,
           },
         ],
       },

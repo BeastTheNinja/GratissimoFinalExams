@@ -1,0 +1,74 @@
+.form {
+  width: min(100% - 2rem, 950px);
+  margin: 2rem auto 4rem;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px #00000014;
+
+  h1 {
+    margin: 0 0 1.5rem;
+    color: #8b0808;
+  }
+}
+
+.formLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.inputColumn,
+.descriptionColumn {
+  > div {
+    margin-bottom: 1rem;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-weight: 600;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    font: inherit;
+
+    &:focus {
+      outline: 2px solid #ab0e0e;
+      border-color: #ab0e0e;
+    }
+  }
+}
+
+.descriptionColumn {
+  display: flex;
+  flex-direction: column;
+
+  textarea {
+    min-height: 360px;
+    resize: vertical;
+  }
+}
+
+.submitButton {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.75rem 1.25rem;
+  color: #fff;
+  background-color: #ab0e0e;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  font: inherit;
+
+  &:hover {
+    background-color: #8b0808;
+  }
+}

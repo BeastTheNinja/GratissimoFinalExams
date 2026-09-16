@@ -1,0 +1,31 @@
+@use "../../utils/colors.scss" as colors;
+
+.page {
+  min-height: 100vh;
+  padding: 3rem 1rem;
+  background-color: colors.$white;
+}
+
+.intro {
+  background-color: colors.$alt_white;
+  margin: 0 auto;
+
+  h1 {
+    margin-bottom: 1rem;
+    color: #8b0808;
+    text-align: center;
+  }
+
+  p {
+    line-height: 1.6;
+  }
+
+  a {
+    display: inline-block;
+    text-align: center;
+    margin-top: 1rem;
+    color: #8b0808;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+}

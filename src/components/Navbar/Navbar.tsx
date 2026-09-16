@@ -3,10 +3,17 @@ import { NavLink, useNavigate } from "react-router";
 
 import logo from "../../assets/logo/GratissimoLogo.svg";
 import { isLoggedIn, logout } from "../../services/auth.service";
+import Toaster from "../Toaster/Toaster";
+import Button from "../Button/Button";
 
 function Navbar() {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
+
+  const [toast, setToast] = useState<{
+    message: string;
+    type: "success" | "error";
+  } | null>(null);
 
   useEffect(() => {
     async function checkLogin() {
@@ -41,6 +48,20 @@ function Navbar() {
       navigate("/");
     }
   }
+  async function handleAdvertiseClick() {
+    const authenticated = await isLoggedIn();
+
+    if (!authenticated) {
+      setToast({
+        message: "Du skal være logget ind for at oprette en annonce.",
+        type: "error",
+      });
+
+      return;
+    }
+
+    navigate("/advertise");
+  }
 
   const linkClassName = ({ isActive }: { isActive: boolean }) =>
     `text-base text-[#F9F9F9] ${isActive ? "underline" : ""
@@ -67,12 +88,13 @@ function Navbar() {
               Alle jobs
             </NavLink>
 
-            <NavLink
-              to="/advertise"
-              className={linkClassName}
+            <Button
+              type="button"
+              className="text-base text-[#F9F9F9]"
+              onClick={handleAdvertiseClick}
             >
               Opret annonce
-            </NavLink>
+            </Button>
 
             <NavLink
               to="/news"
@@ -120,6 +142,13 @@ function Navbar() {
           </div>
         </div>
       </nav>
+      {toast && (
+        <Toaster
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
     </>
   );
 }

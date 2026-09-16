@@ -5,6 +5,7 @@ import { useState } from "react";
 import styles from "./JobList.module.scss"
 import Toaster from "../Toaster/Toaster";
 import { isLoggedIn } from "../../services/auth.service";
+import { saveFavorite } from "../../services/saveFavorite";
 
 type JobListProps = {
     jobs: Job[];
@@ -34,22 +35,31 @@ function JobList({ jobs }: JobListProps) {
         );
     }
 
-    async function handleSave() {
-        const loggedIn = await isLoggedIn();
+    async function handleSave(jobId: number) {
+        try {
+            const loggedIn = await isLoggedIn();
 
-        if (!loggedIn) {
+            if (!loggedIn) {
+                setToast({
+                    message: "Du skal være logget ind for at gemme et job.",
+                    type: "error",
+                });
+
+                return;
+            }
+
+            await saveFavorite(jobId);
+
             setToast({
-                message: "Du skal være logget ind for at gemme et job.",
+                message: "Jobbet er gemt.",
+                type: "success",
+            });
+        } catch {
+            setToast({
+                message: "Jobbet kunne ikke gemmes.",
                 type: "error",
             });
-
-            return;
         }
-
-        setToast({
-            message: "Jobbet er gemt.",
-            type: "success",
-        });
     }
 
     return (
@@ -86,7 +96,10 @@ function JobList({ jobs }: JobListProps) {
                                     {isOpen ? "Luk" : "Åben"}
                                 </Button>
 
-                                <Button type="button" onClick={handleSave}>
+                                <Button
+                                    type="button"
+                                    onClick={() => handleSave(job.id)}
+                                >
                                     Gem <img src={Favorit} alt="Favorit ikon" />
                                 </Button>
                             </div>
