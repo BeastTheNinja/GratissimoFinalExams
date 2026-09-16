@@ -13,14 +13,15 @@ function TestimoniesSlider({
     // Holder styr på hvilken testimony der vises
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    // Skifter automatisk til næste testimony hvert 5. sekund
+    // Intervallet oprettes kun når der er mere end én testimony
+    // fordi en enkelt testimony ikke behøver automatisk skift
     useEffect(() => {
         if (testimonies.length <= 1) {
             return;
         }
 
         const interval = setInterval(() => {
-            // Starter forfra, når den sidste testimony er vist
+            // Starter forfra når den sidste testimony er vist
             setCurrentIndex((previousIndex) =>
                 previousIndex === testimonies.length - 1
                     ? 0
@@ -28,15 +29,16 @@ function TestimoniesSlider({
             );
         }, 5000);
 
-        // Stopper intervallet, når komponenten fjernes
+        // Cleanup forhindrer at intervallet fortsætter efter komponenten
+        // er fjernet fra siden
         return () => clearInterval(interval);
     }, [testimonies.length]);
 
-    // Viser ingenting, hvis der ikke er hentet nogen testimonies
+    // Viser ingenting hvis der ikke er hentet nogen testimonies
     if (testimonies.length === 0) {
         return null;
     }
-    // Den aktive testimony, som skal vises
+    // Den aktive testimony som skal vises
     const currentTestimony = testimonies[currentIndex];
 
     return (

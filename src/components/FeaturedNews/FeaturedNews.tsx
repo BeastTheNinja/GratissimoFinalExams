@@ -13,7 +13,8 @@ function FeaturedNews({ news }: FeaturedNewsProps) {
 
     const [featuredNews, setFeaturedNews] = useState<News[]>([]);
 
-    // Bland nyhederne tilfældigt og vis højst tre af dem som featured news
+    // Listen kopieres først så den originale news-array ikke ændres
+    // når nyhederne blandes
     useEffect(() => {
         const shuffledNews = [...news].sort(() => Math.random() - 0.5);
         setFeaturedNews(shuffledNews.slice(0, 3));

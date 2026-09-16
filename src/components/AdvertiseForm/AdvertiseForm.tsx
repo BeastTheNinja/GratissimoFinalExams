@@ -44,7 +44,8 @@ function AdvertiseForm() {
         setError("");
 
         try {
-            // Inputfelter giver strings, men API'et forventer tal på disse felter.
+            // Browserens inputværdier kommer altid ind som tekst men API'et
+            // forventer et numerisk postnummer
             await createAnnonce({
                 title: formData.title,
                 description: formData.description,
@@ -72,7 +73,7 @@ function AdvertiseForm() {
                     : "Annoncen kunne ikke oprettes."
             );
         } finally {
-            // Loading stopper både efter succes og fejl.
+            // finally sikrer at loading altid slås fra både efter succes og fejl
             setLoading(false);
         }
     }

@@ -27,12 +27,14 @@ function Home() {
   const { data: news } = useFetch<News[]>("/api/articles");
   const { data: testimonies } = useFetch<Testimony[]>("/api/testimony")
 
-  // Henter værdier fra jobopslagene og fjerner dubletter til filterets dropdown-menuer
+  // Set fjerner dubletter fordi flere jobopslag kan have samme region
+  // kategori eller arbejdstype
   const regions = [...new Set(
     (jobs ?? []).map((job) => job.region.name)
   )];
 
-
+  // jobs kan være null mens data hentes Derfor bruges en tom liste som
+  // fallback så map ikke giver en fejl
   const categories = [...new Set(
     (jobs ?? []).map((job) => job.jobCategory.name)
   )];

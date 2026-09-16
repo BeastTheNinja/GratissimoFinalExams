@@ -41,6 +41,8 @@ export async function refreshToken() {
 
   return response;
 }
+// Login-status kontrolleres på backend i stedet for kun at stole på
+// at der findes en token i browserens cookies
 export async function register(credentials: RegisterCredentials) {
   return api<RegisterResponse>("/api/users", {
     method: "POST",

@@ -22,7 +22,8 @@ function SearchResult() {
 
     const queryString = searchParams.toString();
 
-    // Bygger API-endpointet ud fra de aktuelle søgeparametre
+    // Søgeparametrene fra URL'en bruges direkte til API-kaldet så siden
+    // kan genindlæses eller deles uden at miste søgningen
     const endpoint = `/api/job-listings${queryString ? `?${queryString}` : ""
         }`;
 
@@ -73,7 +74,7 @@ function SearchResult() {
     return (
         <>
             <section>
-                
+
                 <SearchBar onSearch={handleSearch} />
                 <Filter
                     values={filters}
@@ -81,7 +82,7 @@ function SearchResult() {
                     categories={categories}
                     workTypes={workTypes}
                     onChange={setFilters}
-                    onReset={() =>
+                    onReset={() => {
                         // Nulstiller både filtrene og søgeparametrene i URL'en
                         setFilters({
                             region: "",
@@ -89,8 +90,11 @@ function SearchResult() {
                             workType: "",
                             workHome: "",
                             period: "",
-                        })
-                    }
+                        });
+
+                        // Fjerner også søgeparametrene fra URL'en
+                        setSearchParams({});
+                    }}
                 />
             </section>
 

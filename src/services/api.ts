@@ -3,6 +3,8 @@ import { Cookies } from "react-cookie";
 const API_URL = import.meta.env.VITE_API_URL;
 const cookies = new Cookies();
 
+// Alle API-kald går gennem denne funktion så headers token og fejl-
+// håndtering kun skal implementeres ét sted
 async function api<T>(
   endpoint: string,
   options?: RequestInit
@@ -28,7 +30,9 @@ async function api<T>(
       `API Error ${response.status}: ${errorBody}`
     );
   }
-
+ 
+  // Et 204-svar har ingen JSON-body og derfor skal response.json()
+  // ikke kaldes i dette tilfælde
   if (response.status === 204) {
     return undefined as T;
   }

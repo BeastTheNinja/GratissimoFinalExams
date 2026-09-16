@@ -1,97 +1,19 @@
-import {
-  useState,
-} from "react";
-import type { FormEvent } from "react";
-
-import { useNavigate } from "react-router";
-
-
-import Input from "../../components/Input/Input";
-import Loading from "../../components/Loading/Loading";
-import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
-
-import { login } from "../../services/auth.service";
+import LoginForm from "../../components/LoginForm/LoginForm";
+import styles from "./Login.module.scss"
 
 function Login() {
-  const navigate = useNavigate();
-
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  async function handleSubmit(
-    event: FormEvent<HTMLFormElement>
-  ) {
-    event.preventDefault();
-
-    setLoading(true);
-    setError("");
-
-    try {
-      await login({
-        username: userName,
-        password,
-      });
-
-      window.dispatchEvent(
-        new CustomEvent("auth-change", {
-          detail: true,
-        })
-      );
-
-      navigate("/mypage");
-
-    } catch {
-      setError("Invalid username or password.");
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  if (loading) {
-    return (
-      <Loading message="Logging in..." />
-    );
-  }
 
   return (
-    <section>
-      <h1>Login</h1>
+    <section className={styles.authPage}>
+      <section className={styles.authIntro}>
+        <h1>Log ind eller opret dig som bruger</h1>
+        <p>Når du opretter en profil på Gratissimo får du adgang til at oprette, slette og redigere i job annoncer. Som privatperson får du mulighed for at gemme de jobs du kunne være interesseret i. </p>
+        <p>Log ind for at gå til min side</p>
+      </section>
 
-      {error && (
-        <ErrorMessage message={error} />
-      )}
-
-      <form onSubmit={handleSubmit}>
-        <Input
-          id="username"
-          name="username"
-          label="Username"
-          type="text"
-          value={userName}
-          onChange={(event) =>
-            setUserName(event.target.value)
-          }
-          required
-        />
-
-        <Input
-          id="password"
-          name="password"
-          label="Password"
-          type="password"
-          value={password}
-          onChange={(event) =>
-            setPassword(event.target.value)
-          }
-          required
-        />
-
-        <input type="submit" value="login" />
-
-      </form>
+      <section className={styles.authForm}>
+        <LoginForm />
+      </section>
     </section>
   );
 }

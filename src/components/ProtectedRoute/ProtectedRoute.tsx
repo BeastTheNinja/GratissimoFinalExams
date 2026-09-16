@@ -17,10 +17,12 @@ function ProtectedRoute() {
     checkAuthentication();
   }, []);
 
+  // null betyder at login-status endnu ikke er afklaret
   if (authenticated === null) {
     return <Loading message="Checking authentication..." />;
   }
 
+  // Brugeren sendes til login hvis backend afviser authentication
   if (!authenticated) {
     return <Navigate to="/login" replace />;
   }
