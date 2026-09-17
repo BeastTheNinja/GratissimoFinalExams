@@ -45,7 +45,7 @@ function Navbar() {
       );
 
       setLoggedIn(false);
-      navigate("/");
+      navigate("/login");
     }
   }
   async function handleAdvertiseClick() {

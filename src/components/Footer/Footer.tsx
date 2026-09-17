@@ -1,7 +1,7 @@
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 
-import { useState, type FormEvent } from "react";
+import { useState, type SubmitEvent } from "react";
 import { subscribeToNewsletter } from "../../services/newsletter.service";
 
 
@@ -21,7 +21,7 @@ function Footer() {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
 
     setIsLoading(true);

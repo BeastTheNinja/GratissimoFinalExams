@@ -1,8 +1,13 @@
+import { useState } from "react";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router";
+import MyAnnouncement from "../../components/MyAnnouncement/MyAnnouncement";
+import MyFavorit from "../../components/MyFavorit/MyFavorit";
 
 function MyPage() {
   const navigate = useNavigate()
+
+  const [activeview, setActiveView] = useState<"MineAnnoncer" | "MineFavoritter">("MineAnnoncer");
   return (
     <>
       <section>
@@ -16,14 +21,16 @@ function MyPage() {
         </Button>
       </section>
       <section>
-        <Button>
+        <Button onClick={() => setActiveView("MineAnnoncer")}>
           Mine annoncer
         </Button>
-        <Button>
+        <Button onClick={() => setActiveView("MineFavoritter")}>
           Mine favoritter
         </Button>
-
-
+      </section>
+      <section>
+        {activeview === "MineAnnoncer" && <MyAnnouncement />}
+        {activeview === "MineFavoritter" && <MyFavorit />}
       </section>
     </>
   );

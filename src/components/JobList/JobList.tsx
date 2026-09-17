@@ -35,7 +35,7 @@ function JobList({ jobs }: JobListProps) {
         );
     }
 
-    async function handleSave(jobId: number) {
+    async function handleSave(jobListingId: number) {
         try {
             const loggedIn = await isLoggedIn();
 
@@ -48,7 +48,7 @@ function JobList({ jobs }: JobListProps) {
                 return;
             }
 
-            await saveFavorite(jobId);
+            await saveFavorite(jobListingId);
 
             setToast({
                 message: "Jobbet er gemt.",
@@ -63,7 +63,7 @@ function JobList({ jobs }: JobListProps) {
     }
 
     return (
-        <section>
+        <section className={styles.jobList}>
             {jobs.length === 0 ? (
                 <p>Ingen resultater fundet.</p>
             ) : (

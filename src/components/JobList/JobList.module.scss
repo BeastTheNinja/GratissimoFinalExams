@@ -1,8 +1,9 @@
-section {
+.jobList {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  width: min(100% - 2rem, 900px);
+  width: 100%;
+  max-width: 900px;
   margin: 0 auto;
   padding: 2rem 0;
 

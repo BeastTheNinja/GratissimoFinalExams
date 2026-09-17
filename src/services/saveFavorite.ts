@@ -1,8 +1,8 @@
 import api from "./api";
 
-export function saveFavorite(jobId: number) {
+export function saveFavorite(jobListingId: number) {
     return api("/api/favorites", {
         method: "POST",
-        body: JSON.stringify({ jobId }),
+        body: JSON.stringify({ jobListingId }),
     });
 }
