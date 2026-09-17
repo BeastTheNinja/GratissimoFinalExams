@@ -5,7 +5,7 @@ import { useState } from "react";
 import styles from "./JobList.module.scss"
 import Toaster from "../Toaster/Toaster";
 import { isLoggedIn } from "../../services/auth.service";
-import { saveFavorite } from "../../services/saveFavorite";
+import { saveFavorite } from "../../services/saveFavorite.service";
 
 type JobListProps = {
     jobs: Job[];

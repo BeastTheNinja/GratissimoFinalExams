@@ -1,0 +1,47 @@
+@use "../../utils/colors.scss" as colors;
+
+.page {
+    width: 100%;
+    padding: 2rem 1rem 4rem;
+}
+
+.intro {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 8px;
+    background-color: colors.$white;
+    box-shadow: 0 2px 8px #00000012;
+
+    h1 {
+        margin-bottom: 0.75rem;
+        color: colors.$accent;
+    }
+
+    p {
+        max-width: 700px;
+        line-height: 1.6;
+    }
+}
+
+.actions,
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.tabs {
+    justify-content: center;
+    max-width: 900px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 1.5rem 0 0;
+}
+
+.content {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}

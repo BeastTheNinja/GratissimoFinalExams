@@ -1,5 +1,6 @@
 export type Job = {
     id: number;
+    userId: number;
     title: string;
     description: string;
     address: string;

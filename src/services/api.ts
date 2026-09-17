@@ -30,14 +30,20 @@ async function api<T>(
       `API Error ${response.status}: ${errorBody}`
     );
   }
- 
-  // Et 204-svar har ingen JSON-body og derfor skal response.json()
-  // ikke kaldes i dette tilfælde
+
+  // API'et kan returnere JSON almindelig tekst eller 204 uden svar
+  // Derfor håndteres status og content type før svaret parses
   if (response.status === 204) {
     return undefined as T;
   }
 
-  return response.json();
+  const contentType = response.headers.get("content-type");
+
+  if (contentType?.includes("application/json")) {
+    return response.json();
+  }
+
+  return response.text() as Promise<T>;
 }
 
 export default api;
