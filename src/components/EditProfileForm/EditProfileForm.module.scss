@@ -10,6 +10,11 @@
   background-color: colors.$white;
   border-radius: 8px;
   box-shadow: 0 2px 8px #00000012;
+  
+  .success {
+    color: green;
+    font-weight: 600;
+  }
 
   div {
     display: flex;
