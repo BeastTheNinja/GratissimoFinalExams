@@ -13,7 +13,6 @@ import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import MyPage from "../pages/MyPage/MyPage";
 import News from "../pages/News/News";
 import SearchResult from "../pages/SearchResult/SearchResult";
-import EditProfile from "../pages/EditProfile/EditProfile";
 
 export const router = createBrowserRouter([
   {
@@ -45,10 +44,6 @@ export const router = createBrowserRouter([
           {
             path: "/mypage",
             element: <MyPage />,
-          },
-          {
-            path: "/mypage/editprofile",
-            element: <EditProfile />
           },
           {
             path: "/advertise",

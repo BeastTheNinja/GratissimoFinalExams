@@ -6,6 +6,7 @@ import MyFavorit from "../../components/MyFavorit/MyFavorit";
 import styles from "./MyPage.module.scss";
 import { Cookies } from "react-cookie";
 import type { User } from "../../types/user";
+import EditProfileForm from "../../components/EditProfileForm/EditProfileForm";
 
 const cookies = new Cookies();
 function MyPage() {
@@ -14,14 +15,14 @@ function MyPage() {
 
   const navigate = useNavigate();
 
-  const [activeview, setActiveView] = useState<"MineAnnoncer" | "MineFavoritter">("MineAnnoncer");
+  const [activeview, setActiveView] = useState<"MineAnnoncer" | "MineFavoritter" | "RedigerProfil">("MineAnnoncer");
 
   return (
     <div className={styles.page}>
       <section className={styles.intro}>
 
         <h1>Velkommen {user?.firstname}</h1>
-        
+
         <p>
           Rediger eller slet dine annoncer. Du kan også danne dig et
           overblik over dine gemte favoritter.
@@ -31,7 +32,10 @@ function MyPage() {
           <Button onClick={() => navigate("/login")}>
             Log ud
           </Button>
-          <Button onClick={() => navigate("/mypage/editprofile")}>
+          <Button
+            onClick={() => setActiveView("RedigerProfil")}
+            variant={activeview === "RedigerProfil" ? "primary" : "secondary"}
+          >
             Rediger profil
           </Button>
         </div>
@@ -55,6 +59,7 @@ function MyPage() {
       <section className={styles.content}>
         {activeview === "MineAnnoncer" && <MyAnnouncement />}
         {activeview === "MineFavoritter" && <MyFavorit />}
+        {activeview === "RedigerProfil" && <EditProfileForm user={user} />}
       </section>
     </div>
   );
