@@ -11,7 +11,6 @@ import EditProfileForm from "../../components/EditProfileForm/EditProfileForm";
 const cookies = new Cookies();
 function MyPage() {
   const user = cookies.get<User>("user");
-  console.log(user)
 
   const navigate = useNavigate();
 
